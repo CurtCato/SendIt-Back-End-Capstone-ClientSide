@@ -5,6 +5,7 @@ import useSimpleAuth from "../hooks/ui/useSimpleAuth";
 import Register from "./auth/Register";
 import Login from "./auth/Login";
 import Map from "./home/Map"
+import SearchableMap from "./home/SearchableMap"
 
 const ApplicationViews = () => {
   const { isAuthenticated } = useSimpleAuth();
@@ -30,6 +31,13 @@ const ApplicationViews = () => {
         path="/"
         render={props => {
           return <Map {...props} />;
+        }}
+      />
+      <Route
+        exact
+        path="/search"
+        render={props => {
+          return <SearchableMap {...props} />;
         }}
       />
     </React.Fragment>

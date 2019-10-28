@@ -10,7 +10,7 @@ const NavBar = props => {
         <nav className="navbar navbar-light light-blue flex-md-nowrap p-0 shadow navbar1">
             <ul className="nav nav-pills nav-fill">
                 <li className="nav-item">
-                    <Link className="nav-link" to="/">Home</Link>
+                    <Link className="nav-link" to="/search">Map</Link>
                 </li>
 
             </ul>

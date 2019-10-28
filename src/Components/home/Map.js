@@ -1,6 +1,5 @@
 import React,{ useState } from 'react'
 import MapGL, {GeolocateControl } from 'react-map-gl'
-// import config from '../config'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import mapboxgl from 'mapbox-gl'
 
@@ -16,10 +15,10 @@ const Map = () => {
 
   const [viewport, setViewPort ] = useState({
     width: "100%",
-    height: 900,
-    latitude: 0,
-    longitude: 0,
-    zoom: 2
+    height: 600,
+    latitude: 36.1627,
+    longitude: -86.7816,
+    zoom: 8
   })
 
   const _onViewportChange = viewport => setViewPort({...viewport, transitionDuration: 3000 })
