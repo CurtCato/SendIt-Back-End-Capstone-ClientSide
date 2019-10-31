@@ -12,8 +12,8 @@ class SearchableMap extends Component {
   state = {
     viewport :{
       latitude: 36.1627,
-      longitude: -86.7816,
-      zoom: 6
+      longitude: 86.7816,
+      zoom: 1
     },
     searchResultLayer: null
   }
