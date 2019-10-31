@@ -30,7 +30,7 @@ const UpdateGym = props => {
 
     //HTTP request from APIManager to update the gym object in DB
     APIManager.put("gyms", updatedGym).then(() => {
-      props.history.push("/");
+      props.history.push(`/gyms/${gymEdit.id}`);
     });
   };
 

@@ -17,7 +17,7 @@ const Map = () => {
   const [locations, setLocations] = useState([]);
   const [viewport, setViewPort] = useState({
     width: "100%",
-    height: 600,
+    height: 800,
     latitude: 36.1627,
     longitude: -86.7816,
     zoom: 8,
@@ -65,13 +65,6 @@ const Map = () => {
                   className="mapMarker"
                 />
                 </Link>
-                {/* <img
-                  width="10px"
-                  height="10px"
-                  className="mtn"
-                  src="mtn.png"
-                  alt="marker"
-                /> */}
               </Marker>
             </div>
           );
