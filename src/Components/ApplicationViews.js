@@ -6,6 +6,9 @@ import Register from "./auth/Register";
 import Login from "./auth/Login";
 import Map from "./home/Map"
 import SearchableMap from "./home/SearchableMap"
+import AddGymForm from "./gym/AddGym";
+import GymDetails from "./gym/GymDetails"
+import UpdateGym from "./gym/UpdateGym"
 
 const ApplicationViews = () => {
   const { isAuthenticated } = useSimpleAuth();
@@ -35,9 +38,23 @@ const ApplicationViews = () => {
       />
       <Route
         exact
-        path="/search"
+        path="/addgym"
         render={props => {
-          return <SearchableMap {...props} />;
+          return <AddGymForm {...props} />;
+        }}
+      />
+      <Route
+        exact
+        path="/gyms/:gymId(\d+)"
+        render={props => {
+          return <GymDetails {...props} />;
+        }}
+      />
+      <Route
+        exact
+        path="/editgym/:gymId(\d+)"
+        render={props => {
+          return <UpdateGym {...props} />;
         }}
       />
     </React.Fragment>

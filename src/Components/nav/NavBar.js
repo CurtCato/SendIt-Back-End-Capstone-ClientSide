@@ -10,9 +10,36 @@ const NavBar = props => {
         <nav className="navbar navbar-light light-blue flex-md-nowrap p-0 shadow navbar1">
             <ul className="nav nav-pills nav-fill">
                 <li className="nav-item">
-                    <Link className="nav-link" to="/search">Map</Link>
+                    <Link className="nav-link" to="/">Map</Link>
                 </li>
+                {
+                    isAuthenticated() ?
+                    <>
+                    <li className="nav-item">
+                    <Link className="nav-link" to="/mygyms">My Gyms</Link>
+                    </li>
+                        <li className="nav-item">
+                            <button className="nav-link fakeLink logout-link"
+                                onClick={() => {
+                                    logout()
+                                    props.history.push({
+                                        pathname: "/"
+                                    })
+                                }
+                                }
+                            >Logout</button>
+                        </li>
+                        </> :
+                        <>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/login">Login</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/register">Register</Link>
+                        </li>
+                        </>
 
+                }
             </ul>
         </nav>
     )

@@ -1,0 +1,9 @@
+
+.mapMarker {
+    background-image: url('mtn.png');
+    background-size: cover;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    cursor: pointer;
+  }

@@ -1,45 +1,84 @@
-import React,{ useState } from 'react'
-import MapGL, {GeolocateControl } from 'react-map-gl'
-import 'mapbox-gl/dist/mapbox-gl.css'
-import mapboxgl from 'mapbox-gl'
-
-const TOKEN=mapboxgl.accessToken='pk.eyJ1IjoiY3VydGNhdG8iLCJhIjoiY2syNm96N3A5MDh5ODNtb2p4OXFmMHZhYyJ9.0D76nINjKYmKDJr4iyFydQ'
+import React, { useState, useEffect } from "react";
+import { Link } from 'react-router-dom'
+import ReactMapGL, { NavigationControl, Marker } from "react-map-gl";
+import "mapbox-gl/dist/mapbox-gl.css";
+import APIManager from "../modules/APIManager";
+import TOKEN from "./token";
+import "./Map.css";
 
 const geolocateStyle = {
-  float: 'left',
-  margin: '50px',
-  padding: '10px'
+  position: "absolute",
+  top: 0,
+  left: 0,
+  padding: "10px"
 };
 
 const Map = () => {
-
-  const [viewport, setViewPort ] = useState({
+  const [locations, setLocations] = useState([]);
+  const [viewport, setViewPort] = useState({
     width: "100%",
     height: 600,
     latitude: 36.1627,
     longitude: -86.7816,
-    zoom: 8
-  })
+    zoom: 8,
+    bearing: 0,
+    pitch: 0
+  });
 
-  const _onViewportChange = viewport => setViewPort({...viewport, transitionDuration: 3000 })
+  const getGymLocations = () => {
+    APIManager.getAll("gyms").then(response => setLocations(response));
+  };
+
+  const _onViewportChange = viewport =>
+    setViewPort({ ...viewport, transitionDuration: 30 });
+
+  useEffect(() => {
+    getGymLocations();
+  }, []);
 
   return (
-    <div style={{ margin: '0 auto'}}>
-      <h1 style={{textAlign: 'center', fontSize: '25px', fontWeight: 'bolder' }}>GeoLocator: Click To Find Your Location or click <a href="/search">here</a> to search for a location</h1>
-      <MapGL
+    <div style={{ margin: "0 auto" }}>
+      <h1
+        style={{ textAlign: "center", fontSize: "25px", fontWeight: "bolder" }}
+      >
+        Do you have a gym not on the map? Click <a href="/addgym">here</a> to add it!
+      </h1>
+      <ReactMapGL
         {...viewport}
         mapboxApiAccessToken={TOKEN}
-        mapStyle="mapbox://styles/mapbox/dark-v8"
+        mapStyle="mapbox://styles/mapbox/streets-v9"
         onViewportChange={_onViewportChange}
       >
-        <GeolocateControl
-          style={geolocateStyle}
-          positionOptions={{enableHighAccuracy: true}}
-          trackUserLocation={true}
-        />
-      </MapGL>
+        <div className="nav" style={geolocateStyle}>
+          <NavigationControl onViewportChange={_onViewportChange} />
+        </div>
+        {locations.map(location => {
+          return (
+            <div key={location.id}>
+              <Marker
+                latitude={parseFloat(location.latitude)}
+                longitude={parseFloat(location.longitude)}
+              >
+                <Link className="nav-link" to={`/gyms/${location.id}`}>
+                <div
+                  key={location.id}
+                  className="mapMarker"
+                />
+                </Link>
+                {/* <img
+                  width="10px"
+                  height="10px"
+                  className="mtn"
+                  src="mtn.png"
+                  alt="marker"
+                /> */}
+              </Marker>
+            </div>
+          );
+        })}
+      </ReactMapGL>
     </div>
-  )
-}
+  );
+};
 
-export default Map
+export default Map;
