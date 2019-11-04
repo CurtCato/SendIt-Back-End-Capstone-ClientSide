@@ -52,7 +52,7 @@ const GymDetails = props => {
           <br />
           <h2>Classes Offered at {singleGym.gym_name}</h2>
 
-          {singleGym.climber_id == localStorage.getItem("user_id") ? (
+          {singleGym.climber_id === localStorage.getItem("user_id") ? (
             <div>
               <button
                 onClick={() => props.history.push(`/editgym/${singleGym.id}`)}
@@ -77,7 +77,7 @@ const GymDetails = props => {
                   {classO.time_offered}
                 </h5>
                 <h5>Description: {classO.description}</h5>
-                {singleGym.climber_id == localStorage.getItem("user_id") ? (
+                {singleGym.climber_id === localStorage.getItem("user_id") ? (
                   <div>
                     <button
                       onClick={() =>

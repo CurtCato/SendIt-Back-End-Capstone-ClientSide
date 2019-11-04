@@ -6,8 +6,10 @@ const AddGymForm = props => {
   const street_address = useRef();
   const wall_height = useRef();
   const gym_size = useRef();
+  const selectedTypes = useRef([])
 
   const [gym, setGym] = useState([]);
+  const [climbingTypes, setClimbingTypes] = useState([]);
 
   const addToGymList = e => {
     e.preventDefault();
@@ -17,12 +19,37 @@ const AddGymForm = props => {
       street_address: street_address.current.value,
       wall_height: wall_height.current.value,
       gym_size: gym_size.current.value,
-      climber_id: localStorage.getItem("user_id")
+      climber_id: localStorage.getItem("user_id"),
+      selectedCLimbingTypes: selectedTypes.current
     };
+
+    console.log(newGymInfo)
     APIManager.post("gyms", newGymInfo).then(() => {
       props.history.push("/");
     });
   };
+
+
+  const getClimbingTypes = () => {
+    APIManager.getAll("climbingtypes").then(response =>
+      setClimbingTypes(response)
+    );
+  };
+
+  const typeSelected = (id) => {
+    const typeIds = selectedTypes.current
+    if (!typeIds.includes(id)) {
+      typeIds.push(id)
+    } else {
+      typeIds.splice(typeIds.indexOf(id), 1)
+    }
+    console.log(typeIds)
+  }
+
+
+  useEffect(() => {
+    getClimbingTypes();
+  },[]);
 
   return (
     <>
@@ -73,6 +100,25 @@ const AddGymForm = props => {
                 className="form-control"
                 required
               />
+            </fieldset>
+            <fieldset>
+              <label>Climbing Types:{" "}</label>
+              {climbingTypes.map(climbingType => {
+                return (
+                <label key={climbingType.id}>
+                  {climbingType.type_name}{" "}
+                  <input
+                    key={climbingType.id}
+                    name={climbingType.type_name}
+                    type="checkbox"
+                    // checked=
+                    value={climbingType.id}
+                    onChange={() => typeSelected(climbingType.id)}
+                    // onChange=
+                  />
+                </label>
+                )
+              })}
             </fieldset>
             <button onClick={e => addToGymList(e)}>Add Gym</button>
           </div>
