@@ -1,5 +1,5 @@
 import { Route } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { withRouter, Redirect } from "react-router-dom";
 import useSimpleAuth from "../hooks/ui/useSimpleAuth";
 import Register from "./auth/Register";
@@ -8,6 +8,7 @@ import Map from "./home/Map";
 import AddGymForm from "./gym/CreateGym";
 import GymDetails from "./gym/GymDetails";
 import UpdateGym from "./gym/UpdateGym";
+import UserGyms from "./gym/UserGyms"
 import AddClassForm from "./classesOffered/CreateClass";
 import UpdateClass from "./classesOffered/UpdateClass"
 
@@ -34,7 +35,11 @@ const ApplicationViews = () => {
         exact
         path="/"
         render={props => {
+            if (isAuthenticated()) {
           return <Map {...props} />;
+            } else {
+                return <Redirect to="/login" />
+            }
         }}
       />
       <Route
@@ -49,6 +54,16 @@ const ApplicationViews = () => {
         path="/gyms/:gymId(\d+)"
         render={props => {
           return <GymDetails {...props} />;
+        }}
+      />
+      <Route
+        path="/usergyms"
+        render={props => {
+            if (isAuthenticated()) {
+          return <UserGyms {...props} />;
+            } else {
+                return <Redirect to="/login" />
+            }
         }}
       />
       <Route

@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
-import MapGL, { NavigationControl, Marker, Popup } from "react-map-gl";
+import MapGL, { NavigationControl } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import APIManager from "../modules/APIManager";
 import TOKEN from "./token";
 import { GeoJsonLayer } from "deck.gl";
 import Geocoder from "react-map-gl-geocoder";
+
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import "./Map.css";
+import GymPopUp from "./GymPopUp"
 
 const geolocateStyle = {
   position: "absolute",
@@ -18,22 +19,17 @@ const geolocateStyle = {
 
 const Map = props => {
   const [locations, setLocations] = useState([]);
-  const [showPopUp, setshowPopUp] = useState(false);
   const mapRef = useRef({});
   const [searchResultLayer, setSearchResultLayer] = useState({});
   const [viewport, setViewPort] = useState({
     width: "100%",
-    height: 800,
-    latitude: 36.1627,
-    longitude: -86.7816,
-    zoom: 8,
+    height: 600,
+    latitude: 41.26068,
+    longitude: -95.94026,
+    zoom: 4,
     bearing: 0,
     pitch: 0
   });
-
-  const redirectToDetails = id => {
-    props.history.push(`/gyms/${id}`);
-  };
 
   const getGymLocations = () => {
     APIManager.getAll("gyms").then(response => setLocations(response));
@@ -72,57 +68,20 @@ const Map = props => {
         <div className="nav" style={geolocateStyle}>
           <NavigationControl onViewportChange={_onViewportChange} />
         </div>
-        {locations.map(location => {
-          return (
-            <div className="mapboxgl-marker" key={location.id}>
-              <Marker
-                latitude={parseFloat(location.latitude)}
-                longitude={parseFloat(location.longitude)}
-              >
-                <img
-                  key={location.id}
-                  onMouseEnter={() => {
-                    setshowPopUp(true);
-                  }}
-                  onMouseLeave={() => {
-                    setshowPopUp(false);
-                  }}
-                  className="mapMarker"
-                  onDoubleClick={() => {
-                    redirectToDetails(location.id);
-                  }}
-                />
-              </Marker>
-              {showPopUp ? (
-                <Popup
-                  key={location.id}
-                  latitude={parseFloat(location.latitude)}
-                  longitude={parseFloat(location.longitude)}
-                  anchor="bottom-right"
-                  offset={{
-                    "bottom-left": [12, -38],
-                    bottom: [0, -38],
-                    "bottom-right": [-12, -38]
-                  }}
-                >
-                  <h3 style={{ fontSize: 10 }}>{location.gym_name}</h3>
-                  <h4 style={{ fontSize: 8 }}>{location.street_address}</h4>
-                </Popup>
-              ) : (
-                ""
-              )}
-            </div>
-          );
-        })}
+        {locations.map(location =>
+          <GymPopUp key={location.id} {...props} location={location}/>
+
+        )}
         <h1
+          className="addGym text-white"
           style={{
             textAlign: "center",
             fontSize: "25px",
-            fontWeight: "bolder"
+            fontWeight: "bolder",
+            background: "black"
           }}
         >
-          Do you have a gym not on the map? Click <a href="/addgym">here</a> to
-          add it!
+          Click <a href="/addgym">here</a> to add a gym to the map!
         </h1>
         <Geocoder
           mapRef={mapRef}

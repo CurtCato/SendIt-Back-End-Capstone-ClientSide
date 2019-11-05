@@ -8,7 +8,6 @@ const AddGymForm = props => {
   const gym_size = useRef();
   const selectedTypes = useRef([])
 
-  const [gym, setGym] = useState([]);
   const [climbingTypes, setClimbingTypes] = useState([]);
 
   const addToGymList = e => {
@@ -111,10 +110,8 @@ const AddGymForm = props => {
                     key={climbingType.id}
                     name={climbingType.type_name}
                     type="checkbox"
-                    // checked=
                     value={climbingType.id}
                     onChange={() => typeSelected(climbingType.id)}
-                    // onChange=
                   />
                 </label>
                 )
