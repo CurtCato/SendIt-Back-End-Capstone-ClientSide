@@ -5,7 +5,6 @@ import APIManager from "../modules/APIManager";
 import TOKEN from "./token";
 import { GeoJsonLayer } from "deck.gl";
 import Geocoder from "react-map-gl-geocoder";
-
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import "./Map.css";
 import GymPopUp from "./GymPopUp";

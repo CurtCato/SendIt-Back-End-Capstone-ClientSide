@@ -7,6 +7,7 @@ const UpdateGym = props => {
   const gym_name = useRef();
   const wall_height = useRef();
   const gym_size = useRef();
+  const url = useRef()
 
   // this function gets one gym's information so it can be displayed in the input fields
   const getGym = () => {
@@ -25,7 +26,8 @@ const UpdateGym = props => {
       street_address: street_address.current.value,
       gym_name: gym_name.current.value,
       wall_height: wall_height.current.value,
-      gym_size: gym_size.current.value
+      gym_size: gym_size.current.value,
+      url: url.current.value
     };
 
     //HTTP request from APIManager to update the gym object in DB
@@ -86,6 +88,17 @@ const UpdateGym = props => {
                 name="gymSize"
                 className="form-control"
                 defaultValue={gymEdit.gym_size}
+                required
+              />
+            </fieldset>
+            <fieldset>
+              <label htmlFor="inputUrl"> Gym Website </label>
+              <input
+                ref={url}
+                type="text"
+                name="url"
+                className="form-control"
+                defaultValue={gymEdit.url}
                 required
               />
             </fieldset>

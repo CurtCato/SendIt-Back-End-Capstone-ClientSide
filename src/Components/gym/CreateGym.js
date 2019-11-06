@@ -6,6 +6,7 @@ const AddGymForm = props => {
   const street_address = useRef();
   const wall_height = useRef();
   const gym_size = useRef();
+  const url = useRef()
   const selectedTypes = useRef([])
 
   const [climbingTypes, setClimbingTypes] = useState([]);
@@ -18,6 +19,7 @@ const AddGymForm = props => {
       street_address: street_address.current.value,
       wall_height: wall_height.current.value,
       gym_size: gym_size.current.value,
+      url: url.current.value,
       climber_id: localStorage.getItem("user_id"),
       selectedCLimbingTypes: selectedTypes.current
     };
@@ -95,6 +97,17 @@ const AddGymForm = props => {
                 type="text"
                 name="gym_size"
                 ref={gym_size}
+                placeholder="Gym Size"
+                className="form-control"
+                required
+              />
+            </fieldset>
+            <fieldset>
+              <label htmlFor="url">Gym Website</label>
+              <input
+                type="text"
+                name="url"
+                ref={url}
                 placeholder="Gym Size"
                 className="form-control"
                 required

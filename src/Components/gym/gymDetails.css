@@ -1,0 +1,38 @@
+.gym-details {
+  background-image: url(Chicago_1.jpg);
+      /* Full height */
+  height: 100vh;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.details-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 300px;
+    margin-right: 300px;
+    opacity: .85;
+}
+
+.class-info {
+    opacity: .85;
+    margin-top: 50px;
+    margin-left: 300px;
+    margin-right: 300px;
+}
+
+.gym-button {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.class-button {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
