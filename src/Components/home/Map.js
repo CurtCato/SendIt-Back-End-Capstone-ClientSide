@@ -8,7 +8,7 @@ import Geocoder from "react-map-gl-geocoder";
 
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import "./Map.css";
-import GymPopUp from "./GymPopUp"
+import GymPopUp from "./GymPopUp";
 
 const geolocateStyle = {
   position: "absolute",
@@ -19,20 +19,59 @@ const geolocateStyle = {
 
 const Map = props => {
   const [locations, setLocations] = useState([]);
+  const [climbingTypes, setClimbingTypes] = useState([]);
+  const selectedTypes = useRef([]);
   const mapRef = useRef({});
   const [searchResultLayer, setSearchResultLayer] = useState({});
   const [viewport, setViewPort] = useState({
     width: "100%",
-    height: 600,
-    latitude: 41.26068,
-    longitude: -95.94026,
-    zoom: 4,
+    height: 837,
+    latitude: 38.89037,
+    longitude: -77.03196,
+    zoom: 3.5,
     bearing: 0,
     pitch: 0
   });
 
   const getGymLocations = () => {
     APIManager.getAll("gyms").then(response => setLocations(response));
+  };
+
+  const getAutoBelayGymLocations = () => {
+    const currentSelection = selectedTypes.current;
+    if (currentSelection.includes(1)) {
+      APIManager.getAll("gyms/getAutoBelays").then(response =>
+        setLocations(response)
+      );
+    }
+  };
+
+  const getTopRopeGymLocations = () => {
+    const currentSelection = selectedTypes.current;
+    if (currentSelection.includes(2)) {
+      APIManager.getAll("gyms/getTopRopes").then(response =>
+        setLocations(response)
+      );
+    }
+  };
+
+  const getLeadGymLocations = () => {
+    const currentSelection = selectedTypes.current;
+    if (currentSelection.includes(3)) {
+      APIManager.getAll("gyms/getLead").then(response =>
+        setLocations(response)
+      );
+    }
+  };
+
+  const getBoulderGymLocations = () => {
+    const currentSelection = selectedTypes.current;
+    if (currentSelection.includes(4)) {
+      APIManager.getAll("gyms/getBoulders").then(response =>
+        setLocations(response)
+      );
+    }
+    console.log(currentSelection);
   };
 
   const _onViewportChange = viewport =>
@@ -52,8 +91,24 @@ const Map = props => {
     });
   };
 
+  const getClimbingTypes = () => {
+    APIManager.getAll("climbingtypes").then(response =>
+      setClimbingTypes(response)
+    );
+  };
+
+  const typeSelected = id => {
+    const typeIds = selectedTypes.current;
+    if (!typeIds.includes(id)) {
+      typeIds.push(id);
+    } else {
+      typeIds.splice(typeIds.indexOf(id), 1);
+    }
+  };
+
   useEffect(() => {
     getGymLocations();
+    getClimbingTypes();
   }, []);
 
   return (
@@ -68,21 +123,48 @@ const Map = props => {
         <div className="nav" style={geolocateStyle}>
           <NavigationControl onViewportChange={_onViewportChange} />
         </div>
-        {locations.map(location =>
-          <GymPopUp key={location.id} {...props} location={location}/>
-
-        )}
+        {locations.map(location => (
+          <GymPopUp key={location.id} {...props} location={location} />
+        ))}
         <h1
-          className="addGym text-white"
+          className="addGym text-black bg-light"
           style={{
             textAlign: "center",
             fontSize: "25px",
-            fontWeight: "bolder",
-            background: "black"
+            fontWeight: "bolder"
           }}
         >
           Click <a href="/addgym">here</a> to add a gym to the map!
         </h1>
+        <fieldset
+          className="text-black"
+          style={{
+            textAlign: "center",
+            fontSize: "25px"
+          }}
+        >
+          <label>Filter by Climbing Types:</label>{" "}
+          {climbingTypes.map(climbingType => {
+            return (
+              <label key={climbingType.id}>
+                {climbingType.type_name}{" "}
+                <input
+                  key={climbingType.id}
+                  name={climbingType.type_name}
+                  type="checkbox"
+                  value={climbingType.id}
+                  onChange={() => {
+                    typeSelected(climbingType.id);
+                    getAutoBelayGymLocations();
+                    getTopRopeGymLocations();
+                    getLeadGymLocations();
+                    getBoulderGymLocations();
+                  }}
+                />
+              </label>
+            );
+          })}
+        </fieldset>
         <Geocoder
           mapRef={mapRef}
           onResult={_onSearchResultChange}

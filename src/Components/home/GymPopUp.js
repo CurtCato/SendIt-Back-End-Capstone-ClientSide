@@ -19,6 +19,7 @@ const GymPopUp = props => {
         <img
           alt=""
           key={props.location.id}
+          id={props.location.id}
           onMouseOver={() => {
             setshowPopUp(true);
           }}

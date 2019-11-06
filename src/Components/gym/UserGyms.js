@@ -18,12 +18,12 @@ const UserGyms = props => {
         <>
             <div className="userGyms">
                 <h2 className="userGymsHeader">
+                    <h1>Click on a gym to view details</h1>
                     {userGyms.map((gym) => {
                         return(
-                            <div className="userGymDiv" key={gym.id}>
-                            <h1>Click on a gym to view details</h1>
-                               <Link to={`/gyms/${gym.id}`}>{gym.gym_name}</Link>
-                            </div>
+                            <ul className="userGymul" key={gym.id}>
+                               <li><Link to={`/gyms/${gym.id}`}>{gym.gym_name}</Link></li>
+                            </ul>
                         )
                     })}
                 </h2>
