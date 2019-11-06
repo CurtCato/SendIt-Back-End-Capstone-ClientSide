@@ -1,14 +1,16 @@
 import { Route } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { withRouter, Redirect } from "react-router-dom";
 import useSimpleAuth from "../hooks/ui/useSimpleAuth";
 import Register from "./auth/Register";
 import Login from "./auth/Login";
-import Map from "./home/Map"
-import SearchableMap from "./home/SearchableMap"
-import AddGymForm from "./gym/AddGym";
-import GymDetails from "./gym/GymDetails"
-import UpdateGym from "./gym/UpdateGym"
+import Map from "./home/Map";
+import AddGymForm from "./gym/CreateGym";
+import GymDetails from "./gym/GymDetails";
+import UpdateGym from "./gym/UpdateGym";
+import UserGyms from "./gym/UserGyms"
+import AddClassForm from "./classesOffered/CreateClass";
+import UpdateClass from "./classesOffered/UpdateClass"
 
 const ApplicationViews = () => {
   const { isAuthenticated } = useSimpleAuth();
@@ -33,7 +35,11 @@ const ApplicationViews = () => {
         exact
         path="/"
         render={props => {
+            if (isAuthenticated()) {
           return <Map {...props} />;
+            } else {
+                return <Redirect to="/login" />
+            }
         }}
       />
       <Route
@@ -51,10 +57,34 @@ const ApplicationViews = () => {
         }}
       />
       <Route
+        path="/usergyms"
+        render={props => {
+            if (isAuthenticated()) {
+          return <UserGyms {...props} />;
+            } else {
+                return <Redirect to="/login" />
+            }
+        }}
+      />
+      <Route
         exact
         path="/editgym/:gymId(\d+)"
         render={props => {
           return <UpdateGym {...props} />;
+        }}
+      />
+      <Route
+        exact
+        path="/createclass/:gymId(\d+)"
+        render={props => {
+          return <AddClassForm {...props} />;
+        }}
+      />
+      <Route
+        exact
+        path="/editclass/:classId(\d+)"
+        render={props => {
+          return <UpdateClass {...props} />;
         }}
       />
     </React.Fragment>

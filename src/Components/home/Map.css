@@ -6,4 +6,11 @@
     height: 25px;
     border-radius: 50%;
     cursor: pointer;
+    position: fixed;
   }
+
+.addGym {
+  position: absolute;
+  bottom: 30px;
+  left: 450px
+}

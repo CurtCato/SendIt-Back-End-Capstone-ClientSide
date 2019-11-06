@@ -47,7 +47,7 @@ export default Object.create(null, {
           "Authorization": `Token ${localStorage.getItem("token")}`
         },
         body: JSON.stringify(newPost)
-      }).then(data => data.json())
+      })
     }
   },
   put: {
