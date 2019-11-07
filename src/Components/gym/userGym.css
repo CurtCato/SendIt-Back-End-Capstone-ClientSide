@@ -1,0 +1,17 @@
+.userGymsHeader {
+    margin-top: 150px;
+}
+
+.user-gym-image {
+    margin-right: 100px;
+}
+
+.userGyms {
+    display: flex;
+    flex-direction: row;
+}
+
+.suit-image {
+    width: 630px;
+    height: 840px;
+}

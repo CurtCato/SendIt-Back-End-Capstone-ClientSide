@@ -119,24 +119,20 @@ const Map = props => {
         mapStyle="mapbox://styles/mapbox/streets-v9"
         onViewportChange={_onViewportChange}
       >
-        <div className="nav" style={geolocateStyle}>
+        <div className="geo-nav" style={geolocateStyle}>
           <NavigationControl onViewportChange={_onViewportChange} />
         </div>
         {locations.map(location => (
           <GymPopUp key={location.id} {...props} location={location} />
         ))}
-        <h1
-          className="addGym text-black bg-light"
-          style={{
-            textAlign: "center",
-            fontSize: "25px",
-            fontWeight: "bolder"
-          }}
+        <button
+          className="addGym"
+          onClick={() => props.history.push("/addgym")}
         >
-          Click <a href="/addgym">here</a> to add a gym to the map!
-        </h1>
+          Click here to add a gym to the map!
+        </button>
         <fieldset
-          className="text-black"
+          className="filter-form"
           style={{
             textAlign: "center",
             fontSize: "25px"

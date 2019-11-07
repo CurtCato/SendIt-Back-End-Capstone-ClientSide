@@ -1,7 +1,8 @@
 import React, { useRef } from "react"
 import { withRouter } from "react-router-dom"
 import useSimpleAuth from "../../hooks/ui/useSimpleAuth"
-import "./Login.css"
+import "./register.css"
+import treks from "./Earth-Treks-climbing.jpg"
 
 
 const Register = props => {
@@ -32,9 +33,9 @@ const Register = props => {
     }
 
     return (
-        <main style={{ textAlign: "center" }}>
-            <form className="form--login" onSubmit={handleRegister}>
-                <h1 className="h3 mb-3 font-weight-normal">Register for Bangazon</h1>
+        <main className="register-main" style={{ textAlign: "center" }}>
+            <form className="register-form" onSubmit={handleRegister}>
+                <h1 className="h3 mb-3 font-weight-normal">Register for SendIt</h1>
                 <fieldset>
                     <label htmlFor="userName"> Username </label>
                     <input ref={userName} type="text"
@@ -89,6 +90,9 @@ const Register = props => {
                     </button>
                 </fieldset>
             </form>
+            <div className="register-image-div">
+        <img src={treks} alt="treks" width='100%' height='840vh' />
+      </div>
         </main>
     )
 }

@@ -1,0 +1,19 @@
+.update-class {
+    background-image: url(IMPACT-Climbing-AltRock.jpg);
+    height: 100vh;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+.update-form {
+    display: inline-block;
+    margin: 0 auto;
+    text-align: left;
+    margin-right: 15px;
+    margin-top: 180px;
+    /* opacity: .85; */
+    width: 550px;
+}

@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import APIManager from "../modules/APIManager";
+import "./updateClass.css"
 
 const UpdateClass = props => {
   const [classEdit, setClass] = useState([]);
@@ -41,9 +42,9 @@ const UpdateClass = props => {
   //Edit form that user will use to fill out new information
   return (
     <>
-      <main style={{ textAlign: "center" }}>
-        <form className="form--login" onSubmit={handleUpdate}>
-          <h1 className="h3 mb-3 font-weight-normal">Edit Form</h1>
+      <main className="update-class" style={{ textAlign: "center" }}>
+        <form className="update-form card bg-light px-5 py-5" onSubmit={handleUpdate}>
+          <h1 className="h3 mb-3 font-weight-normal card-header">Edit This Class</h1>
           <div>
             <fieldset>
               <label htmlFor="inputClassName"> Class Name </label>

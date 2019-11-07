@@ -1,6 +1,5 @@
 .gym-details {
   background-image: url(Chicago_1.jpg);
-      /* Full height */
   height: 100vh;
 
   /* Center and scale the image nicely */
@@ -9,17 +8,24 @@
   background-size: cover;
 }
 
+.overlay {
+    background-color: black;
+    background-size: cover;
+    height: 100vh;
+    opacity: .5;
+}
+
 .details-list {
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin-left: 300px;
     margin-right: 300px;
-    opacity: .85;
+    fill-opacity: 1;
 }
 
 .class-info {
-    opacity: .85;
+    opacity: 1;
     margin-top: 50px;
     margin-left: 300px;
     margin-right: 300px;
@@ -35,4 +41,13 @@
     display:flex;
     flex-direction: row;
     justify-content: space-evenly;
+}
+
+.card-body {
+    text-align: left;
+    margin-left: 300px;
+}
+
+.class-details {
+    margin-left: 30px;
 }

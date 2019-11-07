@@ -1,5 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import APIManager from "../modules/APIManager";
+import gear from "./bouldering-gear-white-background-bouldering-gear-place-white-background-gear-includes-chalk-bag-climbing-shoes-medical-tape-106740097 (1).jpg";
+import "./updateGym.css";
 
 const UpdateGym = props => {
   const [gymEdit, setGym] = useState([]);
@@ -7,7 +9,7 @@ const UpdateGym = props => {
   const gym_name = useRef();
   const wall_height = useRef();
   const gym_size = useRef();
-  const url = useRef()
+  const url = useRef();
 
   // this function gets one gym's information so it can be displayed in the input fields
   const getGym = () => {
@@ -44,70 +46,77 @@ const UpdateGym = props => {
   return (
     <>
       <main style={{ textAlign: "center" }}>
-        <form className="form--login" onSubmit={handleUpdate}>
-          <h1 className="h3 mb-3 font-weight-normal">Edit Form</h1>
-          <div>
-            <fieldset>
-              <label htmlFor="inputAddress"> Address </label>
-              <input
-                ref={street_address}
-                type="text"
-                name="address"
-                className="form-control"
-                defaultValue={gymEdit.street_address}
-                required
-              />
-            </fieldset>
-            <fieldset>
-              <label htmlFor="inputGymName"> Gym Name </label>
-              <input
-                ref={gym_name}
-                type="text"
-                name="gymName"
-                className="form-control"
-                defaultValue={gymEdit.gym_name}
-                required
-              />
-            </fieldset>
-            <fieldset>
-              <label htmlFor="inputWallHeight"> Wall Height </label>
-              <input
-                ref={wall_height}
-                type="text"
-                name="wallHeight"
-                className="form-control"
-                defaultValue={gymEdit.wall_height}
-                required
-              />
-            </fieldset>
-            <fieldset>
-              <label htmlFor="inputGymSize"> Gym Size </label>
-              <input
-                ref={gym_size}
-                type="text"
-                name="gymSize"
-                className="form-control"
-                defaultValue={gymEdit.gym_size}
-                required
-              />
-            </fieldset>
-            <fieldset>
-              <label htmlFor="inputUrl"> Gym Website </label>
-              <input
-                ref={url}
-                type="text"
-                name="url"
-                className="form-control"
-                defaultValue={gymEdit.url}
-                required
-              />
-            </fieldset>
+        <div className="create-form-div">
+          <div className="create-gym-image-div">
+            <img src={gear} alt="gear" />
           </div>
+          <div className="form-div">
+            <form className="update-form card py-5 px-5 bg-light" onSubmit={handleUpdate}>
+              <h1 className="h3 mb-3 font-weight-normal card-header">Edit Form</h1>
+              <div>
+                <fieldset>
+                  <label htmlFor="inputAddress"> Address </label>
+                  <input
+                    ref={street_address}
+                    type="text"
+                    name="address"
+                    className="form-control"
+                    defaultValue={gymEdit.street_address}
+                    required
+                  />
+                </fieldset>
+                <fieldset>
+                  <label htmlFor="inputGymName"> Gym Name </label>
+                  <input
+                    ref={gym_name}
+                    type="text"
+                    name="gymName"
+                    className="form-control"
+                    defaultValue={gymEdit.gym_name}
+                    required
+                  />
+                </fieldset>
+                <fieldset>
+                  <label htmlFor="inputWallHeight"> Wall Height </label>
+                  <input
+                    ref={wall_height}
+                    type="text"
+                    name="wallHeight"
+                    className="form-control"
+                    defaultValue={gymEdit.wall_height}
+                    required
+                  />
+                </fieldset>
+                <fieldset>
+                  <label htmlFor="inputGymSize"> Gym Square Footage </label>
+                  <input
+                    ref={gym_size}
+                    type="text"
+                    name="gymSize"
+                    className="form-control"
+                    defaultValue={gymEdit.gym_size}
+                    required
+                  />
+                </fieldset>
+                <fieldset>
+                  <label htmlFor="inputUrl"> Gym Website </label>
+                  <input
+                    ref={url}
+                    type="text"
+                    name="url"
+                    className="form-control"
+                    defaultValue={gymEdit.url}
+                    required
+                  />
+                </fieldset>
+              </div>
 
-          <fieldset>
-            <button type="submit">Submit Update</button>
-          </fieldset>
-        </form>
+              <fieldset>
+                <button type="submit">Submit Update</button>
+              </fieldset>
+            </form>
+          </div>
+        </div>
       </main>
     </>
   );
