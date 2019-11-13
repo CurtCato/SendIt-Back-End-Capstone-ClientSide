@@ -1,0 +1,48 @@
+.gym-details {
+    display: flex;
+    flex-direction: row;
+}
+
+.details-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 50px;
+    margin-right: 40px;
+}
+
+.class-info {
+    opacity: 1;
+    margin-top: 50px;
+    margin-left: 50px;
+    margin-right: 40px;
+}
+
+.gym-button {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.class-button {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.card-body {
+    text-align: left;
+    margin-left: 100px;
+}
+
+.class-details {
+    margin-left: 30px;
+}
+
+.climber-suit-image-div {
+    margin-right: 30px;
+}
+
+.climber-suit-image {
+    height: 850px;
+}

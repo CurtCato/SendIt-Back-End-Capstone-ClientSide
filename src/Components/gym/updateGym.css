@@ -1,0 +1,25 @@
+.create-gym-image-div {
+    margin-top: 295px;
+    margin-left: 10px;
+}
+
+.create-form-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.form-div {
+    margin-right:100px;
+    margin-left: 200px;
+    margin-top: -80px;
+}
+
+.update-form {
+    display: inline-block;
+    margin: 0 auto;
+    text-align: left;
+    margin-right: 15px;
+    margin-top: 180px;
+    width: 550px;
+}

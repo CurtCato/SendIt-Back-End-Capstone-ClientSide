@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import APIManager from "../modules/APIManager";
+import "./gymDetails.css";
+import suit from "./climber-in-suit.jpg";
 
 const GymDetails = props => {
   const [singleGym, setGym] = useState([]);
+  const climbTypes = useRef([]);
   const [classOffered, setClassOffered] = useState([]);
 
   const getSingleGym = () => {
@@ -36,6 +39,7 @@ const GymDetails = props => {
     getClassesOffered();
   }, []);
 
+
   return (
     <>
       {
@@ -45,61 +49,111 @@ const GymDetails = props => {
             textAlign: "center"
           }}
         >
-          <h2>{singleGym.gym_name}</h2>
-          <h5>{singleGym.street_address}</h5>
-          <h5>Gym Square Footage: {singleGym.gym_size}</h5>
-          <h5>Maximum Wall Height: {singleGym.wall_height}</h5>
-          <br />
-          <h2>Classes Offered at {singleGym.gym_name}</h2>
-
-          {singleGym.climber_id == localStorage.getItem("user_id") ? (
-            <div>
-              <button
-                onClick={() => props.history.push(`/editgym/${singleGym.id}`)}
-              >
-                Edit Your Gym Details
-              </button>
-              <button onClick={deleteGym}>Remove Gym from Map</button>
-              <h3>
-                Does your gym offer any classes to members? Click{" "}
-                <a href={`/createclass/${singleGym.id}`}>here</a> to add one!
-              </h3>
-            </div>
-          ) : (
-            ""
-          )}
-          {classOffered.map(classO => {
-            return (
-              <div key={classO.id} style={{ textAlign: "left" }}>
-                <h3>{classO.class_name}</h3>
+          <div className="climber-suit-image-div">
+            <img className="climber-suit-image" src={suit} alt="shoes" />
+          </div>
+          <div className="overlay">
+            <div className="details-list card py-3 ">
+              <h2 className="card-header m-3">{singleGym.gym_name}</h2>
+              <div className="card-body">
                 <h5>
-                  We offer {classO.class_name} on {classO.days_offered} at{" "}
-                  {classO.time_offered}
+                  <strong>Gym Address:</strong> {singleGym.street_address}:{" "}
+                  <a
+                    href={`https://maps.google.com/?q=${singleGym.street_address}`}
+                    target="_blank"
+                  >
+                    Click for Directions
+                  </a>
                 </h5>
-                <h5>Description: {classO.description}</h5>
-                {singleGym.climber_id == localStorage.getItem("user_id") ? (
-                  <div>
+                <h5>
+                  <strong>Square Footage:</strong> {singleGym.gym_size} square
+                  feet
+                </h5>
+                <h5>
+                  <strong>Max Wall Height:</strong> {singleGym.wall_height} feet
+                </h5>
+                <h5>
+                  <strong>Gym Website:</strong>{" "}
+                  <a href={`${singleGym.url}`} target="_blank">
+                    Click To View Website
+                  </a>
+                </h5>{" "}
+                {/* {singleGym.matching_types.forEach(type => {
+                climbTypes.push(type);
+              })} */}
+                {/* <h5>Climbing Types: {singleGym.matching_types[0].climbing_type.type_name}</h5> */}
+                <br />
+              </div>
+
+              {singleGym.climber_id == localStorage.getItem("user_id") ? (
+                <div>
+                  <div className="gym-button">
                     <button
                       onClick={() =>
-                        props.history.push(`/editclass/${classO.id}`)
+                        props.history.push(`/editgym/${singleGym.id}`)
                       }
                     >
-                      Edit Your Class Details
+                      Edit Your Gym Details
                     </button>
+
                     <button
-                      onClick={() => {
-                        deleteClass(classO.id);
-                      }}
+                      onClick={() =>
+                        props.history.push(`/createclass/${singleGym.id}`)
+                      }
                     >
-                      Delete Class
+                      Add A Fitness Class
                     </button>
+                    <button onClick={deleteGym}>Remove Gym from Map</button>
                   </div>
-                ) : (
-                  ""
-                )}
-              </div>
-            );
-          })}
+                </div>
+              ) : (
+                ""
+              )}
+            </div>
+
+            <div className="card py-4 px-4 class-info">
+              <h2 className="card-header m-3">
+                Classes Offered at {singleGym.gym_name}
+              </h2>
+              {classOffered.map(classO => {
+                return (
+                  <div className="class-details">
+                    <div key={classO.id} style={{ textAlign: "left" }}>
+                      <h3>{classO.class_name}</h3>
+                      <h5>
+                        We offer {classO.class_name} on {classO.days_offered} at{" "}
+                        {classO.time_offered}
+                      </h5>
+                      <h5>
+                        <strong>Description:</strong> {classO.description}
+                      </h5>
+                      {singleGym.climber_id ==
+                      localStorage.getItem("user_id") ? (
+                        <div className="class-button">
+                          <button
+                            onClick={() =>
+                              props.history.push(`/editclass/${classO.id}`)
+                            }
+                          >
+                            Edit Your Class Details
+                          </button>{" "}
+                          <button
+                            onClick={() => {
+                              deleteClass(classO.id);
+                            }}
+                          >
+                            Delete Class
+                          </button>
+                        </div>
+                      ) : (
+                        ""
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </section>
       }
     </>

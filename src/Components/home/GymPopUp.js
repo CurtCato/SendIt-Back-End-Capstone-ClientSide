@@ -36,14 +36,15 @@ const GymPopUp = props => {
           latitude={parseFloat(props.location.latitude)}
           longitude={parseFloat(props.location.longitude)}
           anchor="bottom-right"
+          className="popup"
           offset={{
             "bottom-left": [12, -38],
             "bottom": [0, -38],
             "bottom-right": [-12, -38]
           }}
         >
-          <h3 style={{ fontSize: 10 }}>{props.location.gym_name}</h3>
-          <h4 style={{ fontSize: 8 }}>{props.location.street_address}</h4>
+          <h3 style={{ fontSize: 20 }}>{props.location.gym_name}</h3>
+          <h4 style={{ fontSize: 15 }}>{props.location.street_address}</h4>
         </Popup>
       ) : (
         ""

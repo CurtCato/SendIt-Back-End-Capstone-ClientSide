@@ -11,6 +11,18 @@
 
 .addGym {
   position: absolute;
-  bottom: 30px;
-  left: 450px
+  top: 70px;
+  left: 700px;
+  font-weight: 700;
 }
+
+.filter-form {
+  background-color: gray;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.geo-nav {
+  margin-top: 60px;
+}
+

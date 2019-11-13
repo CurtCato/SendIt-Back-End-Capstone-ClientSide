@@ -2,7 +2,10 @@
     display: inline-block;
     margin: 0 auto;
     text-align: left;
-    padding-top: 5em;
+    margin-right: 75px;
+    margin-top: 250px;
+    margin-left: 75px;
+    width: 400px;
 }
 
 .form--login > fieldset > input[type="email"],
@@ -12,4 +15,14 @@
 
 input[name="remember"] {
     margin: 1em 0.5em 0 0;
+}
+
+.login-form {
+    display:flex;
+    flex-direction: row;
+    justify-content: left;
+}
+
+.login-image-div {
+    margin-right: 15px;
 }

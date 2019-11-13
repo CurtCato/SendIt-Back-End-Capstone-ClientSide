@@ -1,0 +1,17 @@
+.userGymsHeader {
+    margin-top: 150px;
+}
+
+.user-gyms-image-div {
+    margin-right: 50px;
+}
+
+.userGyms {
+    display: flex;
+    flex-direction: row;
+}
+
+.quick-draws-image {
+    width: 630px;
+    height: 840px;
+}

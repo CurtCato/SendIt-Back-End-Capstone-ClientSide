@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import APIManager from "../modules/APIManager";
+import "./createClass.css";
 
 const AddClassForm = props => {
   const class_name = useRef();
@@ -36,9 +37,9 @@ const AddClassForm = props => {
 
   return (
     <>
-      <main style={{ textAlign: "center" }}>
-        <form className="form--login">
-          <h1 className="h3 mb-3 font-weight-normal">
+      <main className="gym-class" style={{ textAlign: "center" }}>
+        <form className="create-form card bg-light px-5 py-5">
+          <h1 className="h3 mb-3 font-weight-normal card-header">
             Add a Class to your Gym Details!
           </h1>
           <div>
