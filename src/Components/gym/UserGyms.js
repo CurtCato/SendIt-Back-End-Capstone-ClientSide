@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import APIManager from "../modules/APIManager";
 import { Link } from "react-router-dom";
-import suit from "./climber-in-suit.jpg";
+import quick_draws from "./quick-draws.jpg";
 import "./userGym.css";
 
 const UserGyms = props => {
@@ -18,8 +18,8 @@ const UserGyms = props => {
   return (
     <>
       <div className="userGyms">
-        <div className="user-gym-image">
-          <img className="suit-image" src={suit} alt="suit" />
+        <div className="user-gyms-image-div">
+          <img className="quick-draws-image" src={quick_draws} alt="quick-draws" />
         </div>
         <h4 className="userGymsHeader">
           <h1 className="card-header">Click on a gym to view details</h1>

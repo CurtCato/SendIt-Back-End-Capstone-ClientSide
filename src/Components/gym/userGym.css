@@ -2,8 +2,8 @@
     margin-top: 150px;
 }
 
-.user-gym-image {
-    margin-right: 100px;
+.user-gyms-image-div {
+    margin-right: 50px;
 }
 
 .userGyms {
@@ -11,7 +11,7 @@
     flex-direction: row;
 }
 
-.suit-image {
+.quick-draws-image {
     width: 630px;
     height: 840px;
 }
