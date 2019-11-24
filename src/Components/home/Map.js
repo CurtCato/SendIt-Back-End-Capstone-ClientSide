@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import MapGL, { NavigationControl } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import APIManager from "../modules/APIManager";
-import TOKEN from "./token";
+import TOKEN from "./token.js";
 import { GeoJsonLayer } from "deck.gl";
 import Geocoder from "react-map-gl-geocoder";
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
